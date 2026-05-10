@@ -26,7 +26,8 @@ function App() {
   const worksheet=workbook.Sheets[sheetName]
 const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
 console.log(rows)
-const totalemail = rows.map(function(row) { return row[0] }).filter(Boolean)
+const totalemail = rows.flat().filter(Boolean)
+console.log(totalemail)
   
   setemailList(totalemail)
 
