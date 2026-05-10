@@ -29,7 +29,7 @@ app.post("/sendmail", function (req, res) {
   var emailList = req.body.emailList
 
   credential.find().then(function (data) {
-console.log("Credential Found:",data.user)
+console.log("Credential Found:",data[0].user)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
