@@ -15,7 +15,10 @@ mongoose.connect(process.env.MONGO_URI).then(function () {
   console.log("Failed to connect",err)
 })
 
-const credential = mongoose.model("credential", {}, "bulkmail")
+const credential = mongoose.model("credential", {
+  user:String,
+  pass:String
+}, "bulkmail")
 
 
 
@@ -26,12 +29,12 @@ app.post("/sendmail", function (req, res) {
   var emailList = req.body.emailList
 
   credential.find().then(function (data) {
-
+console.log("Credential Found:",data.user)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: data[0].toJSON().user,
-        pass: data[0].toJSON().pass,
+        user: data[0].user,
+        pass: data[0].pass,
       }
     });
 
@@ -59,7 +62,8 @@ app.post("/sendmail", function (req, res) {
 
     }).then(function () {
       res.send(true)
-    }).catch(function () {
+    }).catch(function (error) {
+       console.log("Send error:", error.message) 
       res.send(false)
     })
 
