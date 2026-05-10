@@ -7,6 +7,7 @@ function App() {
   const [msg,setmsg]=useState("")
   const [status,setstatus]=useState(false)
   const [emailList,setemailList]=useState([])
+  const url="https://bulk-mail-roag.onrender.com"
 
   function handlemsg(evt)
   {
@@ -36,7 +37,7 @@ function App() {
   function send()
   {
     setstatus(true)
-    axios.post(`http://localhost:5000/sendmail`,{msg:msg,emailList:emailList})
+    axios.post(`${url}/sendmail`,{msg:msg,emailList:emailList})
 
     .then(function(data)
     {
