@@ -9,7 +9,7 @@ app.use(cors())
 
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://ruqayya:95147@cluster0.xokufus.mongodb.net/passkey?appName=Cluster0").then(function () {
+mongoose.connect(process.env.MONGO_URI).then(function () {
   console.log("Connected to DB")
 }).catch(function (err) {
   console.log("Failed to connect",err)
