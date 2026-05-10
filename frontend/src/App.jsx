@@ -24,9 +24,9 @@ function App() {
   const workbook=XLSX.read(data,{type:'binary'})
   const sheetName=workbook.SheetNames[0]
   const worksheet=workbook.Sheets[sheetName]
-  const emailList=XLSX.utils.sheet_to_json(worksheet,{header:'A'})
-  console.log(emailList)
-  const totalemail=emailList.map(function(item){return item.A})
+const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
+console.log(rows)
+const totalemail = rows.map(function(row) { return row[0] }).filter(Boolean)
   
   setemailList(totalemail)
 
